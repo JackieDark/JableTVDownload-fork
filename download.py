@@ -29,12 +29,12 @@ def download(url):
   # 建立番號資料夾
   urlSplit = url.split('/')
   dirName = urlSplit[-2]
-  if os.path.exists(f'{dirName}/{dirName}.mp4'):
+  if os.path.exists('download/' + dirName):
     print('番號資料夾已存在, 跳過...')
     return
-  if not os.path.exists(dirName):
-      os.makedirs(dirName)
-  folderPath = os.path.join(os.getcwd(), dirName)
+  if not os.path.exists('download/' + dirName):
+      os.makedirs('download/' + dirName)
+  folderPath = os.path.join(os.getcwd(), 'download/' + dirName)
   
   #配置Selenium參數
   options = Options()
@@ -101,7 +101,7 @@ def download(url):
   deleteMp4(folderPath)
 
   # 取得封面
-  getCover(html_file=dr.page_source, folder_path=folderPath)
+  # getCover(html_file=dr.page_source, folder_path=folderPath)
 
   # 轉檔
   ffmpegEncode(folderPath, dirName, encode)
